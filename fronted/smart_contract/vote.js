@@ -7,7 +7,7 @@ var OptionVotes = function (text) {
     this.optionId = obj.optionId;
     this.votes = obj.votes;
   } else {
-    this.optionId = new BigNumber(0);
+    this.optionId = '';
     this.votes = [];
   }
 };

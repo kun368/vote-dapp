@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import DisplayCard from './components/DisplayCard';
 import CreateActivityForm from './components/CreateActivityForm';
-import SortCardList from './components/SortCardList';
-import NormalFooter from './components/NormalFooter';
+import SystemNoticeList from "./components/SystemNoticeList/SystemNoticeList";
+import SimpleFormDialog from "./components/SimpleFormDialog/SimpleFormDialog";
 
 export default class Votehome extends Component {
   static displayName = 'Votehome';
@@ -17,8 +17,8 @@ export default class Votehome extends Component {
       <div className="votehome-page">
         <DisplayCard />
         <CreateActivityForm />
-        <SortCardList />
-        <NormalFooter />
+        <SystemNoticeList/>
+        <SimpleFormDialog/>
       </div>
     );
   }

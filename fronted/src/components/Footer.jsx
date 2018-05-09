@@ -16,14 +16,14 @@ export default class Footer extends PureComponent {
             <Logo />
           </div>
           <div className="copyright">
-            © 2018 Theme designed by{' '}
+            © 2018 Powered by{' '}
             <a
-              href="https://github.com/alibaba/ice"
+              href="https://www.zzkun.com"
               target="_blank"
               className="copyright-link"
               rel="noopener noreferrer"
             >
-              ICE
+              CodeKun
             </a>
           </div>
         </div>

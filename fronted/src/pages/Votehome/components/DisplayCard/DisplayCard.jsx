@@ -32,7 +32,7 @@ export default class extends Component {
   componentDidMount() {
     Mock.mock('/api/systemStatus', {
       "status": "SUCCESS",
-      "message": "接口请求完成的提示，可有可无，status 为非 SUCCESS 时会显示报错的 UI",
+      "message": "",
       "data": {
         arr: [
           { title: '昨日内容浏览次数1', hint: '', value: '22222.2', desc: 'hehehe' },
@@ -78,7 +78,6 @@ export default class extends Component {
                   </div>
                   <div style={styles.desc} className="desc">
                     <span>{item.desc}</span>
-                    {/*<span style={{marginLeft: 5}}>近7天 {up} +100</span>*/}
                   </div>
                 </Col>
               )
