@@ -6,6 +6,7 @@
   "dependencies": {
     "@icedesign/base": "^0.2.0",
     "@icedesign/container": "^0.1.0",
+    "@icedesign/data-binder": "^0.1.1",
     "@icedesign/form-binder": "^0.1.4",
     "@icedesign/icon": "^0.1.1",
     "@icedesign/img": "^0.1.0",
@@ -17,6 +18,7 @@
     "classnames": "^2.2.5",
     "enquire-js": "^0.1.2",
     "foundation-symbol": "^0.1.0",
+    "mockjs": "^1.0.1-beta3",
     "prop-types": "^15.5.8",
     "react-document-title": "^2.0.3",
     "react-router": "^4.2.0",

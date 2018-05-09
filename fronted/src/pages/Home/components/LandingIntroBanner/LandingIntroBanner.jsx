@@ -72,8 +72,8 @@ export default class LandingIntroBanner extends Component {
               <div style={styles.gitContainer}>
                 <iframe
                   style={styles.gitStar}
-                  title="kun368/ACManager"
-                  src="https://ghbtns.com/github-btn.html?user=kun368&repo=ACManager&type=star&count=true&size=large"
+                  title="kun368/vote-dapp"
+                  src="https://ghbtns.com/github-btn.html?user=kun368&repo=vote-dapp&type=star&count=true&size=large"
                 />
               </div>
             </div>
