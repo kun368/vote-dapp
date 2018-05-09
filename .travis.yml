@@ -1,16 +1,23 @@
-language: java
+language:
+  - java
+  - node_js
+node_js:
+  - "iojs"
+  - "8"
 sudo: required
 
 services:
   - docker
 
 install:
+  - npm config set registry https://registry.npm.taobao.org && npm i ice-scripts -g && ice build
+  - cp -af fronted/build/* src/main/resources/static
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 script:
   - mvn clean package -Dmaven.test.skip=true
 
 after_success:
-  - docker build -t kun368/acmanager:$TRAVIS_BRANCH .
+  - docker build -t kun368/vote-dapp:$TRAVIS_BRANCH .
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push kun368/acmanager:$TRAVIS_BRANCH
+  - docker push kun368/vote-dapp:$TRAVIS_BRANCH
