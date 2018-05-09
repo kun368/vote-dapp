@@ -11,7 +11,7 @@ const {Row, Col} = Grid;
 @DataBinder({
   systemStatus: {
     url: '/api/systemStatus',
-    method: 'post',
+    method: 'get',
     data: {},
     defaultBindingData: {
       arr: []
@@ -30,17 +30,17 @@ export default class extends Component {
 
 
   componentDidMount() {
-    Mock.mock('/api/systemStatus', {
-      "status": "SUCCESS",
-      "message": "",
-      "data": {
-        arr: [
-          { title: '昨日内容浏览次数1', hint: '', value: '22222.2', desc: 'hehehe' },
-          { title: '昨日内容浏览次数2', hint: '', value: '22222.2', desc: 'hehehe' },
-        ]
-      }
-    });
-    this.props.updateBindingData('systemStatus', {});
+    // Mock.mock('/api/systemStatus', {
+    //   "status": "SUCCESS",
+    //   "message": "",
+    //   "data": {
+    //     arr: [
+    //       { title: '昨日内容浏览次数1', hint: '', value: '22222.2', desc: 'hehehe' },
+    //       { title: '昨日内容浏览次数2', hint: '', value: '22222.2', desc: 'hehehe' },
+    //     ]
+    //   }
+    // });
+    this.props.updateBindingData('systemStatus');
   }
 
   render() {

@@ -18,9 +18,8 @@ const dict = {
   queryVotes: {
     url: '/api/queryVotes',
     method: 'post',
-    data: {
-      title: '',
-      options: '',
+    params: {
+      currentPage: 1
     },
     defaultBindingData: {
       totalPage: 1,
@@ -37,7 +36,7 @@ const dict = {
   queryOptions: {
     url: '/api/queryOptions',
     method: 'post',
-    data: {
+    params: {
       topicId: ''
     },
     defaultBindingData: {
@@ -57,61 +56,61 @@ export default class SystemNoticeList extends Component {
   }
 
   componentDidMount() {
-    Mock.mock('/api/queryVotes', {
-      "status": "SUCCESS",
-      "message": "",
-      "data": {
-        totalPage: 10,
-        result: [
-          {
-            title: '关于淘宝网存储设备商品发布规范的公告',
-            id: '1',
-            tag: 'up',
-            time: '2017-11-29',
-          },
-          {
-            title: '加强淘宝网电动四轮车类目准入的公告',
-            id: '2',
-            tag: 'new',
-            time: '2017-10-29',
-          },
-          {
-            title: '淘宝网VR头盔商品发布规范的公告',
-            id: '3',
-            tag: 'hot',
-            time: '2017-03-11',
-          },
-          {
-            title: '加强淘宝网农药类目准入的公告',
-            id: '4',
-            tag: '',
-            time: '2017-02-16',
-          }
-        ]
-      }
-    });
-    Mock.mock('/api/queryOptions', {
-      "status": "SUCCESS",
-      "message": "",
-      "data": {
-        result: [
-          { value: '110', label: '支持' },
-          { value: '111', label: '反对' },
-          { value: '112', label: '酱油通道' },
-        ]
-      }
-    });
-    this.props.updateBindingData('queryVotes', {currentPage: 1});
+    // Mock.mock('/api/queryVotes', {
+    //   "status": "SUCCESS",
+    //   "message": "",
+    //   "data": {
+    //     totalPage: 10,
+    //     result: [
+    //       {
+    //         title: '关于淘宝网存储设备商品发布规范的公告',
+    //         id: '1',
+    //         tag: 'up',
+    //         time: '2017-11-29',
+    //       },
+    //       {
+    //         title: '加强淘宝网电动四轮车类目准入的公告',
+    //         id: '2',
+    //         tag: 'new',
+    //         time: '2017-10-29',
+    //       },
+    //       {
+    //         title: '淘宝网VR头盔商品发布规范的公告',
+    //         id: '3',
+    //         tag: 'hot',
+    //         time: '2017-03-11',
+    //       },
+    //       {
+    //         title: '加强淘宝网农药类目准入的公告',
+    //         id: '4',
+    //         tag: '',
+    //         time: '2017-02-16',
+    //       }
+    //     ]
+    //   }
+    // });
+    // Mock.mock('/api/queryOptions', {
+    //   "status": "SUCCESS",
+    //   "message": "",
+    //   "data": {
+    //     result: [
+    //       { value: '110', label: '支持' },
+    //       { value: '111', label: '反对' },
+    //       { value: '112', label: '酱油通道' },
+    //     ]
+    //   }
+    // });
+    this.props.updateBindingData('queryVotes', {params: {currentPage: 1}});
   }
 
   handleChange = (current) => {
     console.log('current:', current);
     this.setState({ current });
-    this.props.updateBindingData('queryVotes', {currentPage: current});
+    this.props.updateBindingData('queryVotes', {params: {currentPage: current}});
   };
 
   handleClickTopic = (title, id) => {
-    this.props.updateBindingData('queryOptions', {topicId: id}, () => {
+    this.props.updateBindingData('queryOptions', {params: {topicId: id}}, () => {
       const { queryOptions } = this.props.bindingData;
       this._childComp.showDialog(title, id, queryOptions.result);
     });

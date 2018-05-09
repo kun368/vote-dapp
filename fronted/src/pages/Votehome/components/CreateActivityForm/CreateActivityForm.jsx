@@ -46,7 +46,7 @@ const SwitchForForm = (props) => {
   createVote: {
     url: '/api/createVote',
     method: 'post',
-    data: {
+    params: {
       title: '',
       options: '',
     },
@@ -69,11 +69,11 @@ export default class CreateActivityForm extends Component {
   }
 
   componentDidMount() {
-    Mock.mock('/api/createVote', {
+    /*Mock.mock('/api/createVote', {
       "status": "SUCCESS",
       "message": "创建成功",
       data: {}
-    });
+    });*/
   }
 
   onFormChange = (value) => {
@@ -97,7 +97,7 @@ export default class CreateActivityForm extends Component {
       if (error) {
         // 处理表单报错
       }
-      this.props.updateBindingData('createVote', value);
+      this.props.updateBindingData('createVote', {params: value});
     });
   };
 
