@@ -57,7 +57,7 @@ export default class FeatureList extends Component {
             </div>
           </div>
           <div style={styles.extraInfo}>
-            <Link to="">
+            <Link to="/votehome">
               <Button style={styles.extraButton}>了解更多 &gt;</Button>
             </Link>
           </div>

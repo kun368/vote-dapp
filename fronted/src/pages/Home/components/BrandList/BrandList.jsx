@@ -34,31 +34,36 @@ export default class BrandList extends Component {
     return (
       <div style={styles.wrapper}>
         <div style={styles.titleWrapper}>
-          <h3 style={styles.title}>专业的选择</h3>
+          <h3 style={styles.title}>星云投票</h3>
           <div style={styles.titleLine}>
             <div style={styles.titleHighlightLine} />
           </div>
         </div>
         <p style={styles.desc}>
-          270多个项目正在使用，持续可靠的稳定，即时有效的服务
+          © 2018 Powered by CodeKun
         </p>
-        <div style={styles.brandListWrapper}>
-          {brandlist.map((item, index) => {
-            return (
-              <div style={styles.brandItem} key={index}>
-                <img src={item} alt="" style={styles.brandImage} />
-              </div>
-            );
-          })}
-        </div>
+        <div style={{marginBottom: 16}}/>
+
         <div style={styles.extraInfo}>
           <Button
             component="a"
-            href="https://github.com/alibaba/ice/issues/156"
+            href="http://www.zzkun.com"
             target="_blank"
             style={styles.extraButton}
           >
-            提交你的案例 +
+            联系作者
+          </Button>
+        </div>
+
+        <div style={{marginBottom: 16}}/>
+        <div style={styles.extraInfo}>
+          <Button
+            component="a"
+            href="https://incentive.nebulas.io/cn/signup.html?invite=OILxo"
+            target="_blank"
+            style={styles.extraButton}
+          >
+            我也要开发智能合约App
           </Button>
         </div>
       </div>

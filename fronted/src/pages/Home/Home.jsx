@@ -23,8 +23,7 @@ export default class Home extends Component {
         <IceworksInfo />
         <DesignLanguage />
         <Materials />
-        {/*<BrandList />*/}
-        <Footer />
+        <BrandList />
       </div>
     );
   }

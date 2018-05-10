@@ -62,13 +62,11 @@ SuperDictionary.prototype = {
   queryOptionsSize: function (optionIds) {
     var ids = optionIds.split(',');
     return ids.map((item, i) => {
-      var ret = 0;
-      try {
-        ret = this.queryOption(item).votes.length;
-      } catch (e) {
-        ret = 0;
+      var res = this.repo.get(item);
+      if (!res) {
+        return 0;
       }
-      return ret;
+      return res.votes.length;
     })
   }
 };

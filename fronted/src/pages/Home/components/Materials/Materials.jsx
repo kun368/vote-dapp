@@ -25,7 +25,7 @@ export default class IntroWithBackground extends Component {
           <p style={styles.desc}>
             去中心化特性与算法本身可以确保防范作弊投票的现象，确保一人一票。
           </p>
-          <Link to="">
+          <Link to="/votehome">
             <Button style={styles.extraButton}>了解更多 &gt;</Button>
           </Link>
         </div>
@@ -111,7 +111,7 @@ const styles = {
     bottom: 0,
     right: 0,
     backgroundImage:
-      'url(https://img.alicdn.com/tfs/TB18Na6iHSYBuNjSspiXXXNzpXa-3800-2026.jpg)',
+      'url(https://cdn.zzkun.com/static/votedapp/code-coding-computer.jpg)',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
     backgroundSize: 'cover',

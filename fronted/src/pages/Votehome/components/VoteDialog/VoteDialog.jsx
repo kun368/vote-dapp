@@ -12,8 +12,7 @@ import G2 from '@antv/g2';
 const {Row, Col} = Grid;
 const {Group: RadioGroup} = Radio;
 
-const dappAddress = "n1rLVkCzV6yHASDfeRQJPqZov3cH7AKUGoP";
-const userAddress = "n1PeCvxwQhCT9SRm7Ho1TWsUiWtz7fHPXGV";
+const dappAddress = "n22WUXD8sDqRTbhd6229N4GC4stDv8PMnWs";
 
 const defaultValue = {
   selectedItem: undefined,
@@ -110,7 +109,7 @@ export default class VoteDialog extends Component {
       const nebulas = require("nebulas");
       const Account = nebulas.Account;
       const neb = new nebulas.Neb();
-      neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"));
+      neb.setRequest(new nebulas.HttpRequest("https://mainnet.nebulas.io"));
 
       const from = Account.NewAccount().getAddressString();
       const selectedItem = this.state.value.selectedItem;

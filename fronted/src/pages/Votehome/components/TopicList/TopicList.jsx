@@ -17,8 +17,8 @@ const dict = {
   new: '热',
 };
 
-const dappAddress = "n1rLVkCzV6yHASDfeRQJPqZov3cH7AKUGoP";
-const userAddress = "n1PeCvxwQhCT9SRm7Ho1TWsUiWtz7fHPXGV";
+const dappAddress = "n22WUXD8sDqRTbhd6229N4GC4stDv8PMnWs";
+const userAddress = "n1ZTecB8Tpb7X7LBL7j3ZcGLVvMrXmVfLfy";
 
 @DataBinder({
   queryVotes: {
@@ -78,7 +78,7 @@ export default class TopicList extends Component {
 
   queryOptionSize = (options, callback) => {
     let param = options.map(it => it.value).join(',');
-    axios.post('https://testnet.nebulas.io/v1/user/call', {
+    axios.post('https://mainnet.nebulas.io/v1/user/call', {
       "from": userAddress,
       "to": dappAddress,
       "value": "0",
