@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import DisplayCard from './components/DisplayCard';
+import SystemStatusCard from './components/SystemStatusCard';
 import CreateActivityForm from './components/CreateActivityForm';
-import SortCardList from './components/SortCardList';
-import NormalFooter from './components/NormalFooter';
+import TopicList from "./components/TopicList/TopicList";
+import VoteDialog from "./components/VoteDialog/VoteDialog";
 
 export default class Votehome extends Component {
   static displayName = 'Votehome';
@@ -15,10 +15,10 @@ export default class Votehome extends Component {
   render() {
     return (
       <div className="votehome-page">
-        <DisplayCard />
+        <SystemStatusCard />
         <CreateActivityForm />
-        <SortCardList />
-        <NormalFooter />
+        <TopicList/>
+        <VoteDialog/>
       </div>
     );
   }

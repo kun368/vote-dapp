@@ -30,7 +30,7 @@ export default class ProductIntro extends Component {
 
               其去中心化特性与算法本身可以确保防范作弊投票的现象，确保一人一票。
             </p>
-            <Link to="">
+            <Link to="/votehome">
               <Button style={styles.extraButton}>了解更多 &gt;</Button>
             </Link>
           </div>
@@ -38,7 +38,7 @@ export default class ProductIntro extends Component {
             <img
               width={696}
               height={527}
-              src="https://img.alicdn.com/tfs/TB1SbvpgQyWBuNjy0FpXXassXXa-1392-1054.png"
+              src="https://cdn.zzkun.com/static/votedapp/votehome.png"
               alt=""
             />
           </div>

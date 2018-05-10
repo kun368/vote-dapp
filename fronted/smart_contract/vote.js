@@ -7,7 +7,7 @@ var OptionVotes = function (text) {
     this.optionId = obj.optionId;
     this.votes = obj.votes;
   } else {
-    this.optionId = new BigNumber(0);
+    this.optionId = '';
     this.votes = [];
   }
 };
@@ -57,6 +57,17 @@ SuperDictionary.prototype = {
       throw new Error("deposit not exist.");
     }
     return item;
+  },
+
+  queryOptionsSize: function (optionIds) {
+    var ids = optionIds.split(',');
+    return ids.map((item, i) => {
+      var res = this.repo.get(item);
+      if (!res) {
+        return 0;
+      }
+      return res.votes.length;
+    })
   }
 };
 module.exports = SuperDictionary;

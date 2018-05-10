@@ -63,62 +63,62 @@ export default class Header extends PureComponent {
 
           {/* Header 右侧内容块 */}
 
-          <Balloon
-            trigger={
-              <div
-                className="ice-design-header-userpannel"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  fontSize: 12,
-                }}
-              >
-                <IceImg
-                  height={40}
-                  width={40}
-                  src="https://img.alicdn.com/tfs/TB1L6tBXQyWBuNjy0FpXXassXXa-80-80.png"
-                  className="user-avatar"
-                />
-                <div className="user-profile">
-                  <span className="user-name" style={{ fontSize: '13px' }}>
-                    淘小宝
-                  </span>
-                  <br />
-                  <span
-                    className="user-department"
-                    style={{ fontSize: '12px', color: '#999' }}
-                  >
-                    技术部
-                  </span>
-                </div>
-                <Icon
-                  type="arrow-down-filling"
-                  size="xxs"
-                  className="icon-down"
-                />
-              </div>
-            }
-            closable={false}
-            className="user-profile-menu"
-          >
-            <ul>
-              <li className="user-profile-menu-item">
-                <Link to="/">
-                  <FoundationSymbol type="person" size="small" />我的主页
-                </Link>
-              </li>
-              <li className="user-profile-menu-item">
-                <Link to="/">
-                  <FoundationSymbol type="repair" size="small" />设置
-                </Link>
-              </li>
-              <li className="user-profile-menu-item">
-                <Link to="/">
-                  <FoundationSymbol type="compass" size="small" />退出
-                </Link>
-              </li>
-            </ul>
-          </Balloon>
+          {/*<Balloon*/}
+            {/*trigger={*/}
+              {/*<div*/}
+                {/*className="ice-design-header-userpannel"*/}
+                {/*style={{*/}
+                  {/*display: 'flex',*/}
+                  {/*alignItems: 'center',*/}
+                  {/*fontSize: 12,*/}
+                {/*}}*/}
+              {/*>*/}
+                {/*<IceImg*/}
+                  {/*height={40}*/}
+                  {/*width={40}*/}
+                  {/*src="https://img.alicdn.com/tfs/TB1L6tBXQyWBuNjy0FpXXassXXa-80-80.png"*/}
+                  {/*className="user-avatar"*/}
+                {/*/>*/}
+                {/*<div className="user-profile">*/}
+                  {/*<span className="user-name" style={{ fontSize: '13px' }}>*/}
+                    {/*淘小宝*/}
+                  {/*</span>*/}
+                  {/*<br />*/}
+                  {/*<span*/}
+                    {/*className="user-department"*/}
+                    {/*style={{ fontSize: '12px', color: '#999' }}*/}
+                  {/*>*/}
+                    {/*技术部*/}
+                  {/*</span>*/}
+                {/*</div>*/}
+                {/*<Icon*/}
+                  {/*type="arrow-down-filling"*/}
+                  {/*size="xxs"*/}
+                  {/*className="icon-down"*/}
+                {/*/>*/}
+              {/*</div>*/}
+            {/*}*/}
+            {/*closable={false}*/}
+            {/*className="user-profile-menu"*/}
+          {/*>*/}
+            {/*<ul>*/}
+              {/*<li className="user-profile-menu-item">*/}
+                {/*<Link to="/">*/}
+                  {/*<FoundationSymbol type="person" size="small" />我的主页*/}
+                {/*</Link>*/}
+              {/*</li>*/}
+              {/*<li className="user-profile-menu-item">*/}
+                {/*<Link to="/">*/}
+                  {/*<FoundationSymbol type="repair" size="small" />设置*/}
+                {/*</Link>*/}
+              {/*</li>*/}
+              {/*<li className="user-profile-menu-item">*/}
+                {/*<Link to="/">*/}
+                  {/*<FoundationSymbol type="compass" size="small" />退出*/}
+                {/*</Link>*/}
+              {/*</li>*/}
+            {/*</ul>*/}
+          {/*</Balloon>*/}
         </div>
       </Layout.Header>
     );

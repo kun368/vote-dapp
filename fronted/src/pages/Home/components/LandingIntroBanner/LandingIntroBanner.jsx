@@ -22,7 +22,7 @@ export default class LandingIntroBanner extends Component {
           className="landing-intro-banner-background"
           style={{
             backgroundImage:
-              'url(https://img.alicdn.com/tfs/TB1cWGdnXGWBuNjy0FbXXb4sXXa-1900-898.png)',
+              'url(https://cdn.zzkun.com/static/votedapp/homeback.png)',
             backgroundPosition: 'center',
           }}
         />
@@ -36,7 +36,9 @@ export default class LandingIntroBanner extends Component {
               className="landing-intro-banner-buttons"
               style={{ textAlign: 'center', marginTop: 70 }}
             >
-              <a href="//coding.net/u/codekun/p/vote-dapp/git" style={styles.leftButton}>
+              <a href="https://incentive.nebulas.io/cn/signup.html?invite=OILxo"
+                 target="_blank"
+                 style={styles.leftButton}>
                 <Button
                   style={{
                     height: 50,
@@ -48,7 +50,7 @@ export default class LandingIntroBanner extends Component {
                   size="large"
                   type="normal"
                 >
-                  Github源代码
+                  我也要开发！
                 </Button>
               </a>
 
@@ -63,7 +65,7 @@ export default class LandingIntroBanner extends Component {
                   type="primary"
                   size="large"
                 >
-                  进入投票系统
+                  进入投票系统 ->
                 </Button>
               </Link>
             </div>
@@ -72,8 +74,8 @@ export default class LandingIntroBanner extends Component {
               <div style={styles.gitContainer}>
                 <iframe
                   style={styles.gitStar}
-                  title="kun368/ACManager"
-                  src="https://ghbtns.com/github-btn.html?user=kun368&repo=ACManager&type=star&count=true&size=large"
+                  title="kun368/vote-dapp"
+                  src="https://ghbtns.com/github-btn.html?user=kun368&repo=vote-dapp&type=star&count=true&size=large"
                 />
               </div>
             </div>

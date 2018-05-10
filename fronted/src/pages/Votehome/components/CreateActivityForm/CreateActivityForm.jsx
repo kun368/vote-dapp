@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import IceContainer from '@icedesign/container';
 import {
   FormBinderWrapper as IceFormBinderWrapper,
   FormBinder as IceFormBinder,
   FormError as IceFormError,
 } from '@icedesign/form-binder';
+
 import {
   Input,
   Button,
@@ -15,13 +16,15 @@ import {
   Radio,
   Grid,
 } from '@icedesign/base';
+import DataBinder from "@icedesign/data-binder/lib/index";
+import Mock from "mockjs";
 
-const { Row, Col } = Grid;
+const {Row, Col} = Grid;
 
 // FormBinder 用于获取表单组件的数据，通过标准受控 API value 和 onChange 来双向操作数据
 const CheckboxGroup = Checkbox.Group;
 const RadioGroup = Radio.Group;
-const { RangePicker } = DatePicker;
+const {RangePicker} = DatePicker;
 
 // Switch 组件的选中等 props 是 checked 不符合表单规范的 value 在此做转换
 const SwitchForForm = (props) => {
@@ -38,6 +41,18 @@ const SwitchForForm = (props) => {
   );
 };
 
+
+@DataBinder({
+  createVote: {
+    url: '/api/createVote',
+    method: 'post',
+    params: {
+      title: '',
+      options: '',
+    },
+    defaultBindingData: {}
+  }
+})
 export default class CreateActivityForm extends Component {
   static displayName = 'CreateActivityForm';
 
@@ -47,15 +62,13 @@ export default class CreateActivityForm extends Component {
     super(props);
     this.state = {
       value: {
-        name: '',
-        area: 'location1',
-        time: [],
-        delivery: false,
-        type: ['地推活动'],
-        resource: '线下场地免费',
-        extra: '',
+        title: '',
+        options: '',
       },
     };
+  }
+
+  componentDidMount() {
   }
 
   onFormChange = (value) => {
@@ -67,13 +80,8 @@ export default class CreateActivityForm extends Component {
   reset = () => {
     this.setState({
       value: {
-        name: '',
-        area: 'location1',
-        time: [],
-        delivery: false,
-        type: ['地推活动'],
-        resource: '线下场地免费',
-        extra: '',
+        title: '',
+        options: '',
       },
     });
   };
@@ -84,14 +92,14 @@ export default class CreateActivityForm extends Component {
       if (error) {
         // 处理表单报错
       }
-      // 提交当前填写的数据
+      this.props.updateBindingData('createVote', {params: value});
     });
   };
 
   render() {
     return (
       <div className="create-activity-form">
-        <IceContainer title="活动发布" style={styles.container}>
+        <IceContainer title="发起投票" style={styles.container}>
           <IceFormBinderWrapper
             ref={(formRef) => {
               this.formRef = formRef;
@@ -102,112 +110,32 @@ export default class CreateActivityForm extends Component {
             <div>
               <Row style={styles.formItem}>
                 <Col xxs="6" s="2" l="2" style={styles.formLabel}>
-                  活动名称：
+                  投票名称：
                 </Col>
 
                 <Col s="12" l="10">
                   <IceFormBinder
-                    name="name"
+                    name="title"
                     required
-                    message="活动名称必须填写"
-                  >
-                    <Input style={{ width: '100%' }} />
+                    message="投票名称必须填写">
+                    <Input style={{width: '100%'}}/>
                   </IceFormBinder>
-                  <IceFormError name="name" />
-                </Col>
-              </Row>
-
-              <Row style={styles.formItem}>
-                <Col xxs="6" s="2" l="2" style={styles.formLabel}>
-                  活动区域：
-                </Col>
-                <Col s="12" l="10">
-                  <IceFormBinder name="area">
-                    <Select
-                      className="next-form-text-align"
-                      dataSource={[
-                        { label: '区域一', value: 'location1' },
-                        { label: '区域二', value: 'location2' },
-                      ]}
-                    />
-                  </IceFormBinder>
-                </Col>
-              </Row>
-
-              <Row style={styles.formItem}>
-                <Col xxs="6" s="2" l="2" style={styles.formLabel}>
-                  活动时间：
-                </Col>
-                <Col s="12" l="10">
-                  <IceFormBinder
-                    name="time"
-                    type="array"
-                    // 使用 RangePicker 组件输出的第二个参数字符串格式的日期
-                    valueFormatter={(date, dateStr) => dateStr}
-                  >
-                    <RangePicker showTime />
-                  </IceFormBinder>
-                </Col>
-              </Row>
-
-              <Row style={styles.formItem}>
-                <Col xxs="6" s="2" l="2" style={styles.formLabel}>
-                  即时配送：
-                </Col>
-                <Col s="12" l="10">
-                  <IceFormBinder name="delivery">
-                    <SwitchForForm />
-                  </IceFormBinder>
-                </Col>
-              </Row>
-
-              <Row style={styles.formItem}>
-                <Col xxs="6" s="2" l="2" style={styles.formLabel}>
-                  活动性质：
-                </Col>
-                <Col s="12" l="10">
-                  <IceFormBinder name="type" type="array">
-                    <CheckboxGroup
-                      className="next-form-text-align"
-                      dataSource={[
-                        { label: '美食线上活动', value: '美食线上活动' },
-                        { label: '地推活动', value: '地推活动' },
-                        { label: '线下主题活动', value: '线下主题活动' },
-                        { label: '单纯品牌曝光', value: '单纯品牌曝光' },
-                      ]}
-                    />
-                  </IceFormBinder>
-                  <div>
-                    <IceFormError name="type" />
-                  </div>
-                </Col>
-              </Row>
-
-              <Row style={styles.formItem}>
-                <Col xxs="6" s="2" l="2" style={styles.formLabel}>
-                  特殊资源：
-                </Col>
-                <Col s="12" l="10">
-                  <IceFormBinder name="resource">
-                    <RadioGroup
-                      className="next-form-text-align"
-                      dataSource={[
-                        { label: '线上品牌商赞助', value: '线上品牌商赞助' },
-                        { label: '线下场地免费', value: '线下场地免费' },
-                      ]}
-                    />
-                  </IceFormBinder>
+                  <IceFormError name="title"/>
                 </Col>
               </Row>
 
               <Row>
                 <Col xxs="6" s="2" l="2" style={styles.formLabel}>
-                  活动形式：
+                  投票选项：
                 </Col>
                 <Col s="12" l="10">
-                  <IceFormBinder name="extra">
-                    <Input multiple style={{ width: '100%' }} />
+                  <IceFormBinder
+                    name="options"
+                    required
+                    message="至少填写一个有效的选项">
+                    <Input multiple style={{width: '100%'}} placeholder="输入投票选项，每行代表一个选项"/>
                   </IceFormBinder>
+                  <IceFormError name="options"/>
                 </Col>
               </Row>
 
