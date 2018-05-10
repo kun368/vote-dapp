@@ -9,8 +9,8 @@ services:
     volumes:
       - ./db:/docker-entrypoint-initdb.d
 
-  spring-server:
-    image: kun368/vote-dapp:dev
+  spring-vote-server:
+    image: kun368/vote-dapp:master
     restart: always
     ports:
       - "8090:8080"
