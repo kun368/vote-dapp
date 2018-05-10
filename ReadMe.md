@@ -2,13 +2,13 @@
 
 [![Build Status](https://travis-ci.org/kun368/vote-dapp.svg?branch=master)](https://travis-ci.org/kun368/vote-dapp)
 [![Language](https://img.shields.io/badge/language-java-orange.svg)](https://github.com/kun368/ACManager)
-[![Language](https://img.shields.io/badge/language-react-blue.svg)](https://github.com/kun368/ACManager)
+[![Language](https://img.shields.io/badge/language-javascript-blue.svg)](https://github.com/kun368/ACManager)
 
-- #### [系统地址](http://vote.zzkun.com)
-- #### [NAS-DAPP开发者注册](https://incentive.nebulas.io/cn/signup.html?invite=OILxo)
+#### [系统地址](http://vote.zzkun.com)
+
+#### [NAS-DAPP开发者注册](https://incentive.nebulas.io/cn/signup.html?invite=OILxo)
 
 **基于NAS智能合约的去中心化投票系统, 构建去中心、公平、公开、公正的区块链投票系统**
-
 
 ## 简介
 
