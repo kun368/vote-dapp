@@ -1,19 +1,19 @@
 import React, {Component} from 'react';
-import {Dialog, Grid, Input, Radio, Button, Select} from '@icedesign/base';
-import IceContainer from '@icedesign/container';
+import {Dialog, Feedback, Grid, Radio, Select, Table, Progress} from '@icedesign/base';
 import {
-  FormBinderWrapper as IceFormBinderWrapper,
   FormBinder as IceFormBinder,
+  FormBinderWrapper as IceFormBinderWrapper,
   FormError as IceFormError,
 } from '@icedesign/form-binder';
 import {enquireScreen} from 'enquire-js';
-import {Feedback} from '@icedesign/base';
-import DataBinder from "@icedesign/data-binder/lib/index";
+import axios from 'axios';
+import G2 from '@antv/g2';
 
 const {Row, Col} = Grid;
 const {Group: RadioGroup} = Radio;
 
-const dappAddress = "n1oXdmwuo5jJRExnZR5rbceMEyzRsPeALgm";
+const dappAddress = "n1rLVkCzV6yHASDfeRQJPqZov3cH7AKUGoP";
+const userAddress = "n1PeCvxwQhCT9SRm7Ho1TWsUiWtz7fHPXGV";
 
 const defaultValue = {
   selectedItem: undefined,
@@ -21,8 +21,8 @@ const defaultValue = {
 
 const Toast = Feedback.toast;
 
-export default class SimpleFormDialog extends Component {
-  static displayName = 'SimpleFormDialog';
+export default class VoteDialog extends Component {
+  static displayName = 'VoteDialog';
 
   constructor(props) {
     super(props);
@@ -32,13 +32,34 @@ export default class SimpleFormDialog extends Component {
       isMobile: false,
       topicTitle: '',
       topicId: 0,
-      topicOptions: []
+      topicOptions: [],
+      optionsSize: []
     };
   }
 
   componentDidMount() {
     this.enquireScreenRegister();
   }
+
+  initCharts = () => {
+    const count = this.state.topicOptions.length;
+    const data = [];
+    for (let i = 0; i < count; ++i) {
+      data.push({
+        genre: this.state.topicOptions[i].label,
+        sold: this.state.optionsSize[i]
+      })
+    }
+    console.log(data);
+    const chart = new G2.Chart({
+      container: 'c1',
+      width: 600,
+      height: 300
+    });
+    chart.source(data);
+    chart.interval().position('genre*sold').color('genre');
+    chart.render();
+  };
 
   enquireScreenRegister = () => {
     const mediaCondition = 'only screen and (max-width: 720px)';
@@ -50,17 +71,19 @@ export default class SimpleFormDialog extends Component {
     }, mediaCondition);
   };
 
-  showDialog = (title, id, options) => {
-    console.log('showDialog:', title, id, options);
+  showDialog = (title, id, options, optionsSize) => {
+    console.log('showDialog:', title, id, options, optionsSize);
     this.setState({
       visible: true,
       topicTitle: title,
       topicId: id,
       topicOptions: options,
+      optionsSize: optionsSize,
       value: {
         selectedItem: options[0].value
       }
     });
+    this.initCharts();
   };
 
   hideDialog = () => {
@@ -69,10 +92,19 @@ export default class SimpleFormDialog extends Component {
     });
   };
 
+  //检查扩展是否已安装，如果安装了扩展，var“webExtensionWallet”将被注入到web页面中1
+  checkInstalledPlugin = () => {
+    return typeof(webExtensionWallet) !== "undefined";
+  };
+
   onOk = () => {
     this.refForm.validateAll((error) => {
       if (error) {
         Toast.error(error);
+        return;
+      }
+      if (!this.checkInstalledPlugin()) {
+        Toast.error("请先安装WebExtensionWallet插件！");
         return;
       }
       const nebulas = require("nebulas");
@@ -85,20 +117,33 @@ export default class SimpleFormDialog extends Component {
       console.log(selectedItem, from, dappAddress);
 
       const contract = {
-        "function": 'voteFor',
-        "args": `["${selectedItem}"]`
+        function: 'voteFor',
+        args: `["${selectedItem}"]`
       };
 
-      neb.api
-        .call(from, dappAddress, "0", "0", "1000000", "2000000", contract)
-        .then(resp => {
-          console.log("success:", resp);
-          Toast.success("投票成功！");
-        })
-        .catch(err => {
-          console.log("error:", err.message);
-          Toast.error("投票失败！");
-        });
+
+      window.postMessage({
+        "target": "contentscript",
+        "data": {
+          "to": dappAddress,
+          "value": "0",
+          "contract": {
+            "function": contract.function,
+            "args": contract.args
+          }
+        },
+        "method": "neb_sendTransaction",
+      }, "*");
+      window.addEventListener('message', function (e) {
+        console.log("message received, msg.data: " + JSON.stringify(e.data));
+        try {
+          if (!!e.data.data.txhash) {
+            console.log("Transaction hash:\n" + JSON.stringify(e.data.data.txhash, null, '\t'));
+          }
+        } catch (e) {
+        }
+      });
+      Toast.success("已发起交易，提交后Status变为Success即投票成功！")
     });
   };
 
@@ -132,10 +177,13 @@ export default class SimpleFormDialog extends Component {
         isFullScreen
         visible={this.state.visible}
       >
-        <div style={{marginBottom: 30}}>
+        <div>
           <strong style={{color: 'red'}}>使用须知：</strong>
-          请务必安装<a href="https://github.com/ChengOrangeJu/WebExtensionWallet" target="_blank">Chrome插件</a>后，使用主网支付！
+          投票请务必安装<a href="https://github.com/ChengOrangeJu/WebExtensionWallet" target="_blank">Chrome插件</a>，并切换到主网！
         </div>
+        <div style={{marginBottom: 26}}/>
+
+        <div id="c1"></div>
 
         <IceFormBinderWrapper
           ref={(ref) => {
@@ -145,10 +193,9 @@ export default class SimpleFormDialog extends Component {
           onChange={this.onFormChange}
         >
           <div style={styles.dialogContent}>
-
             <Row style={styles.formItem}>
               <Col span={`${isMobile ? '6' : '3'}`}>
-                <label style={styles.formLabel}>投票选项</label>
+                <label style={styles.formLabel}>您的选择</label>
               </Col>
               <Col span={`${isMobile ? '18' : '16'}`}>
                 <IceFormBinder
@@ -176,4 +223,9 @@ const styles = {
   formRow: {marginTop: 20},
   input: {width: '100%'},
   formLabel: {lineHeight: '26px'},
+  paginationWrapper: {
+    display: 'flex',
+    padding: '20px 0 0 0',
+    flexDirection: 'row-reverse',
+  },
 };

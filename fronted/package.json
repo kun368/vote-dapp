@@ -4,6 +4,7 @@
   "description": "该模板适用于产品类的首页介绍，默认内置一个页面和五个不同风格的展示区块",
   "homepage": "https://alibaba.github.io/ice/scaffold-preview/ice-website-homepage.html",
   "dependencies": {
+    "@antv/g2": "^3.0.10",
     "@icedesign/base": "^0.2.1",
     "@icedesign/container": "^0.1.2",
     "@icedesign/data-binder": "^0.1.1",

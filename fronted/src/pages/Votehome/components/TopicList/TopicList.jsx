@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { Button } from '@icedesign/base';
+import { Button, Feedback } from '@icedesign/base';
 import { Icon } from '@icedesign/base';
 import IceContainer from '@icedesign/container';
 import { Pagination } from '@icedesign/base';
 import DataBinder from "@icedesign/data-binder/lib/index";
 import Mock from "mockjs";
-import SimpleFormDialog from "../SimpleFormDialog/SimpleFormDialog"
+import VoteDialog from "../VoteDialog/VoteDialog"
+import axios from "axios/index";
+
+
+const Toast = Feedback.toast;
 
 const dict = {
   up: '置顶',
@@ -13,6 +17,8 @@ const dict = {
   new: '热',
 };
 
+const dappAddress = "n1rLVkCzV6yHASDfeRQJPqZov3cH7AKUGoP";
+const userAddress = "n1PeCvxwQhCT9SRm7Ho1TWsUiWtz7fHPXGV";
 
 @DataBinder({
   queryVotes: {
@@ -43,12 +49,14 @@ const dict = {
     defaultBindingData: {
       result: [
         { value: '110', label: '支持' },
+        { value: '111', label: '反对' },
+        { value: '112', label: '酱油通道' },
       ]
     }
   }
 })
-export default class SystemNoticeList extends Component {
-  static displayName = 'SystemNoticeList';
+export default class TopicList extends Component {
+  static displayName = 'TopicList';
 
   constructor(props) {
     super(props);
@@ -68,10 +76,38 @@ export default class SystemNoticeList extends Component {
     this.props.updateBindingData('queryVotes', {params: {currentPage: current}});
   };
 
+  queryOptionSize = (options, callback) => {
+    let param = options.map(it => it.value).join(',');
+    axios.post('https://testnet.nebulas.io/v1/user/call', {
+      "from": userAddress,
+      "to": dappAddress,
+      "value": "0",
+      "nonce": 0,
+      "gasPrice": "1000000",
+      "gasLimit": "2000000",
+      "contract": {
+        "args": `["${param}"]`,
+        "function": 'queryOptionsSize'
+      }
+    })
+      .then(function (response) {
+        let t = response.data.result.result;
+        let json = JSON.parse(t);
+        callback(json);
+      })
+      .catch(function (error) {
+        console.log('error', error);
+      });
+  };
+
   handleClickTopic = (title, id) => {
+    Toast.success("正在拉取投票数据，请稍候...");
     this.props.updateBindingData('queryOptions', {params: {topicId: id}}, () => {
       const { queryOptions } = this.props.bindingData;
-      this._childComp.showDialog(title, id, queryOptions.result);
+      const result = queryOptions.result;
+      this.queryOptionSize(result, (resp) => {
+        this._childComp.showDialog(title, id, queryOptions.result, resp);
+      });
     });
   };
 
@@ -80,7 +116,7 @@ export default class SystemNoticeList extends Component {
 
     return (
       <div className="system-notice-list">
-        <SimpleFormDialog ref={comp => this._childComp = comp}/>
+        <VoteDialog ref={comp => this._childComp = comp}/>
         <IceContainer>
           <div className="notice-list-content">
             <h2 style={styles.title}>最新投票</h2>

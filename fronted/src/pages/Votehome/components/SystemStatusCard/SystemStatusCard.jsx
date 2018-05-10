@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import IceContainer from '@icedesign/container';
 import {Balloon, Grid} from '@icedesign/base';
-import './DisplayCard.scss';
+import './SystemStatusCard.scss';
 import Mock from 'mockjs'
 import DataBinder from '@icedesign/data-binder';
 

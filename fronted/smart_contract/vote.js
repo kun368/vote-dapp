@@ -57,6 +57,19 @@ SuperDictionary.prototype = {
       throw new Error("deposit not exist.");
     }
     return item;
+  },
+
+  queryOptionsSize: function (optionIds) {
+    var ids = optionIds.split(',');
+    return ids.map((item, i) => {
+      var ret = 0;
+      try {
+        ret = this.queryOption(item).votes.length;
+      } catch (e) {
+        ret = 0;
+      }
+      return ret;
+    })
   }
 };
 module.exports = SuperDictionary;
