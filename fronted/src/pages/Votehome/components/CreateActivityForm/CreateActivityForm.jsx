@@ -69,11 +69,6 @@ export default class CreateActivityForm extends Component {
   }
 
   componentDidMount() {
-    /*Mock.mock('/api/createVote', {
-      "status": "SUCCESS",
-      "message": "创建成功",
-      data: {}
-    });*/
   }
 
   onFormChange = (value) => {
