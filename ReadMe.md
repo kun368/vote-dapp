@@ -1,14 +1,16 @@
-# Vote Dapp
+# Vote-Dapp: 去中心化投票系统
 
 [![Build Status](https://travis-ci.org/kun368/vote-dapp.svg?branch=master)](https://travis-ci.org/kun368/vote-dapp)
 [![Language](https://img.shields.io/badge/language-java-orange.svg)](https://github.com/kun368/ACManager)
 [![Language](https://img.shields.io/badge/language-react-blue.svg)](https://github.com/kun368/ACManager)
 
-基于NAS智能合约的去中心化投票系统
+- #### [系统地址](http://vote.zzkun.com)
+- #### [NAS-DAPP开发者注册](https://incentive.nebulas.io/cn/signup.html?invite=OILxo)
 
-构建去中心、公平、公开、公正的区块链投票系统
+**基于NAS智能合约的去中心化投票系统, 构建去中心、公平、公开、公正的区块链投票系统**
 
-### 简介
+
+## 简介
 
 该智能合约解决了投票场景中的不信任痛点。
 
@@ -16,7 +18,7 @@ Vote-Dapp不依赖特定的投票机构，它以利用特定的智能合约技�
 
 其去中心化特性与算法本身可以确保防范作弊投票的现象，确保一人一票。
 
-### Snapshot
+## Snapshot
 
 ![](http://zzkun-tuchuang.oss-cn-hangzhou.aliyuncs.com/18-5-10/15541246.jpg)
 
@@ -30,7 +32,7 @@ Vote-Dapp不依赖特定的投票机构，它以利用特定的智能合约技�
 
 ![](http://zzkun-tuchuang.oss-cn-hangzhou.aliyuncs.com/18-5-10/74060902.jpg)
 
-### 合约
+## 合约
 
 ```javascript
 "use strict";
